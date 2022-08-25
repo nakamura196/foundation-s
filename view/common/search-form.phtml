@@ -11,10 +11,14 @@ switch ($searchType) {
 }
 //$searchValue = $this->escapeHtml($this->params()->fromQuery('property', ''));
 $searchValues = $this->params()->fromQuery('property', '');
+$searchValue = "";
 if($searchValues){
-    $searchValue = $searchValues[0]["text"];
-} else {
-    $searchValue = "";
+    foreach ($searchValues as $e){
+        if($e["property"] == "" and $e["type"] == "in"){
+            $searchValue = $e["text"];
+            break;
+        }
+    }
 }
 ?>
 <!--
